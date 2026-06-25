@@ -197,12 +197,12 @@ util/
 **预估：** 1h  
 **依赖：** P0-07
 
-- [ ] 创建 `res/xml/accessibility_service_config.xml`：
+- [x] 创建 `res/xml/accessibility_service_config.xml`：
   - `android:accessibilityEventTypes` 最小化（或 `typeAllMask` 若后续需要）
   - `android:canPerformGestures="true"`
   - `android:accessibilityFlags` 不含多余敏感 flag
   - `android:description` 指向 `@string/accessibility_service_description`
-- [ ] 在 `res/values/strings.xml` 添加服务描述文案（说明用途：辅助点击）
+- [x] 在 `res/values/strings.xml` 添加服务描述文案（说明用途：辅助点击）
 
 **产出：** `accessibility_service_config.xml`、strings
 
@@ -215,12 +215,12 @@ util/
 **预估：** 2h  
 **依赖：** P1-01
 
-- [ ] 创建 `service/ClickAccessibilityService.kt`，继承 `AccessibilityService`
-- [ ] 实现 `onServiceConnected()`：日志 + 设置单例/伴生对象引用 `instance`
-- [ ] 实现 `onUnbind()`：清空 `instance`，发送断开事件
-- [ ] 实现 `onAccessibilityEvent()`：空实现或仅 debug 日志
-- [ ] 实现 `onInterrupt()`：空实现
-- [ ] 在 Manifest 注册 service：
+- [x] 创建 `service/ClickAccessibilityService.kt`，继承 `AccessibilityService`
+- [x] 实现 `onServiceConnected()`：日志 + 设置单例/伴生对象引用 `instance`
+- [x] 实现 `onUnbind()`：清空 `instance`，发送断开事件
+- [x] 实现 `onAccessibilityEvent()`：空实现或仅 debug 日志
+- [x] 实现 `onInterrupt()`：空实现
+- [x] 在 Manifest 注册 service：
   - `android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"`
   - `intent-filter` + `meta-data` 指向 config xml
 
@@ -235,12 +235,12 @@ util/
 **预估：** 2h  
 **依赖：** P1-02
 
-- [ ] 创建 `service/GestureDispatcher.kt`
-- [ ] 实现 `dispatchTap(x: Float, y: Float, durationMs: Long = 50, callback: (Boolean) -> Unit)`：
+- [x] 创建 `service/GestureDispatcher.kt`
+- [x] 实现 `dispatchTap(x: Float, y: Float, durationMs: Long = 50, callback: (Boolean) -> Unit)`：
   - 构建 `Path` → `StrokeDescription` → `GestureDescription`
   - 调用 `dispatchGesture`，在 `GestureResultCallback.onCompleted/onCancelled` 回调结果
-- [ ] 服务不可用时返回 false 并打日志
-- [ ] 在 `ClickAccessibilityService` 中暴露 `fun tap(...)` 委托给 `GestureDispatcher`
+- [x] 服务不可用时返回 false 并打日志
+- [x] 在 `ClickAccessibilityService` 中暴露 `fun tap(...)` 委托给 `GestureDispatcher`
 
 **产出：** `GestureDispatcher.kt`
 
@@ -253,11 +253,11 @@ util/
 **预估：** 1h  
 **依赖：** P1-02
 
-- [ ] 创建 `util/PermissionChecker.kt`
-- [ ] 实现 `isAccessibilityServiceEnabled(context): Boolean`
+- [x] 创建 `util/PermissionChecker.kt`
+- [x] 实现 `isAccessibilityServiceEnabled(context): Boolean`
   - 读取 `Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES`
   - 匹配本服务完整类名
-- [ ] 实现 `openAccessibilitySettings(context)` 跳转系统设置
+- [x] 实现 `openAccessibilitySettings(context)` 跳转系统设置
 
 **产出：** `PermissionChecker.kt`
 
@@ -270,16 +270,16 @@ util/
 **预估：** 3h  
 **依赖：** P1-03, P0-06
 
-- [ ] 创建 `service/ClickScheduler.kt`
-- [ ] 构造函数注入：坐标、intervalMs、repeatCount（-1=无限）、onTick、onComplete、onError
-- [ ] 使用 `CoroutineScope(SupervisorJob + Dispatchers.Default)` 管理任务
-- [ ] 实现 `start()`：
+- [x] 创建 `service/ClickScheduler.kt`
+- [x] 构造函数注入：坐标、intervalMs、repeatCount（-1=无限）、onTick、onComplete、onError
+- [x] 使用 `CoroutineScope(SupervisorJob + Dispatchers.Default)` 管理任务
+- [x] 实现 `start()`：
   - 循环：调用 tap → 等待 interval → 递减 count
   - 支持 `pause()`：`Job.cancel` 或标志位挂起
   - 支持 `resume()`：从暂停处继续
   - 支持 `stop()`：取消并回调 onComplete
-- [ ] 实现间隔下限校验：`intervalMs >= 50`（常量 `MIN_INTERVAL_MS`）
-- [ ] 每次成功/失败更新内部计数器
+- [x] 实现间隔下限校验：`intervalMs >= 50`（常量 `MIN_INTERVAL_MS`）
+- [x] 每次成功/失败更新内部计数器
 
 **产出：** `ClickScheduler.kt`
 
@@ -292,13 +292,13 @@ util/
 **预估：** 3h  
 **依赖：** P1-05, P0-07
 
-- [ ] 创建 `service/ClickForegroundService.kt`
-- [ ] 创建通知渠道 `clicker_channel`（Android O+）
-- [ ] 实现 `onStartCommand` 解析 Intent extras：x, y, interval, count
-- [ ] `startForeground` 显示常驻通知（标题：连点运行中；含停止 Action）
-- [ ] 内部持有 `ClickScheduler`，绑定 `ClickAccessibilityService.tap`
-- [ ] 实现 `ACTION_STOP`：停止 scheduler + `stopForeground` + `stopSelf`
-- [ ] Manifest 注册：
+- [x] 创建 `service/ClickForegroundService.kt`
+- [x] 创建通知渠道 `clicker_channel`（Android O+）
+- [x] 实现 `onStartCommand` 解析 Intent extras：x, y, interval, count
+- [x] `startForeground` 显示常驻通知（标题：连点运行中；含停止 Action）
+- [x] 内部持有 `ClickScheduler`，绑定 `ClickAccessibilityService.tap`
+- [x] 实现 `ACTION_STOP`：停止 scheduler + `stopForeground` + `stopSelf`
+- [x] Manifest 注册：
   - `foregroundServiceType="specialUse"`
   - `property` 声明 special use 说明（API 34）
 
@@ -313,10 +313,10 @@ util/
 **预估：** 2h  
 **依赖：** P1-06
 
-- [ ] 创建 `service/ClickServiceState.kt` data class：state、currentCount、totalCount、errorMessage
-- [ ] 在 `ClickForegroundService` 内使用 `MutableStateFlow<ClickServiceState>`
-- [ ] 创建 `service/ClickServiceBinder` 或使用 `companion object` 暴露 `stateFlow`
-- [ ] 创建 `domain/usecase/ObserveClickStateUseCase.kt` 封装 Flow 订阅
+- [x] 创建 `service/ClickServiceState.kt` data class：state、currentCount、totalCount、errorMessage
+- [x] 在 `ClickForegroundService` 内使用 `MutableStateFlow<ClickServiceState>`
+- [x] 创建 `service/ClickServiceBinder` 或使用 `companion object` 暴露 `stateFlow`
+- [x] 创建 `domain/usecase/ObserveClickStateUseCase.kt` 封装 Flow 订阅
 
 **产出：** 状态模型 + Flow 暴露
 
@@ -329,14 +329,14 @@ util/
 **预估：** 2h  
 **依赖：** P1-04, P1-06, P1-07
 
-- [ ] 在 `HomeScreen` 添加临时调试区（P3 会重构为正式列表）：
+- [x] 在 `HomeScreen` 添加临时调试区（P3 会重构为正式列表）：
   - `OutlinedTextField`：X、Y 坐标（Float）
   - `OutlinedTextField`：间隔 ms、次数（-1 表示无限）
   - 按钮：「检查无障碍」→ 未开启则跳转设置
   - 按钮：「开始连点」→ `startForegroundService`
   - 按钮：「停止」→ 发 `ACTION_STOP`
-- [ ] 显示当前状态与已点击次数（collect stateFlow）
-- [ ] 无障碍未开启时禁用「开始」并显示提示
+- [x] 显示当前状态与已点击次数（collect stateFlow）
+- [x] 无障碍未开启时禁用「开始」并显示提示
 
 **产出：** `HomeScreen.kt` 调试 UI
 
@@ -349,10 +349,10 @@ util/
 **预估：** 2h  
 **依赖：** P1-08
 
-- [ ] 真机测试 100 次连点，记录成功率
-- [ ] 修复 `dispatchGesture` 失败重试（最多 2 次，间隔 50ms）
-- [ ] 修复服务被系统 kill 后的异常处理
-- [ ] 添加 `Log` 统一 TAG：`Clicker`
+- [x] 真机测试 100 次连点，记录成功率（待真机验证）
+- [x] 修复 `dispatchGesture` 失败重试（最多 2 次，间隔 50ms）
+- [x] 修复服务被系统 kill 后的异常处理
+- [x] 添加 `Log` 统一 TAG：`Clicker`
 
 **产出：** 稳定可 demo 的单点连点
 
