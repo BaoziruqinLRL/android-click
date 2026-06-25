@@ -41,10 +41,10 @@
 **预估：** 1h  
 **依赖：** 无
 
-- [ ] 使用 Android Studio 新建项目：`Empty Activity` + `Jetpack Compose`
-- [ ] 设置 `applicationId`：`com.example.androidclick`（可按实际修改）
-- [ ] 设置 `minSdk = 24`，`targetSdk = 34`，`compileSdk = 34`
-- [ ] 启用 Kotlin，`jvmTarget = 17`
+- [x] 使用 Android Studio 新建项目：`Empty Activity` + `Jetpack Compose`
+- [x] 设置 `applicationId`：`com.example.androidclick`（可按实际修改）
+- [x] 设置 `minSdk = 24`，`targetSdk = 34`，`compileSdk = 34`
+- [x] 启用 Kotlin，`jvmTarget = 21`
 
 **产出：** 根目录存在 `settings.gradle.kts`、`app/build.gradle.kts`
 
@@ -57,7 +57,7 @@
 **预估：** 1h  
 **依赖：** P0-01
 
-- [ ] 创建/编辑 `gradle/libs.versions.toml`，锁定版本：
+- [x] 创建/编辑 `gradle/libs.versions.toml`，锁定版本：
   - Kotlin 1.9+
   - Compose BOM 最新稳定版
   - Hilt 2.48+
@@ -65,9 +65,9 @@
   - Navigation Compose 2.7+
   - DataStore 1.0+
   - Lifecycle / Coroutines
-- [ ] 在 `app/build.gradle.kts` 引入上述依赖
-- [ ] 应用 `com.google.dagger.hilt.android` 插件
-- [ ] 应用 `ksp` 插件（Room、Hilt 注解处理）
+- [x] 在 `app/build.gradle.kts` 引入上述依赖
+- [x] 应用 `com.google.dagger.hilt.android` 插件
+- [x] 应用 `ksp` 插件（Room、Hilt 注解处理）
 
 **产出：** `libs.versions.toml` 依赖声明完整
 
@@ -80,7 +80,7 @@
 **预估：** 0.5h  
 **依赖：** P0-01
 
-- [ ] 在 `app/src/main/java/.../` 下创建目录：
+- [x] 在 `app/src/main/java/.../` 下创建目录：
 
 ```
 ui/home/
@@ -109,10 +109,10 @@ util/
 **预估：** 1h  
 **依赖：** P0-02, P0-03
 
-- [ ] 创建 `ClickerApplication.kt`，添加 `@HiltAndroidApp`
-- [ ] 在 `AndroidManifest.xml` 注册 `android:name=".ClickerApplication"`
-- [ ] 创建 `di/AppModule.kt`（空模块占位）
-- [ ] 将 `MainActivity` 标注 `@AndroidEntryPoint`
+- [x] 创建 `ClickerApplication.kt`，添加 `@HiltAndroidApp`
+- [x] 在 `AndroidManifest.xml` 注册 `android:name=".ClickerApplication"`
+- [x] 创建 `di/AppModule.kt`（空模块占位）
+- [x] 将 `MainActivity` 标注 `@AndroidEntryPoint`
 
 **产出：** `ClickerApplication.kt`、`AppModule.kt`
 
@@ -125,14 +125,14 @@ util/
 **预估：** 2h  
 **依赖：** P0-04
 
-- [ ] 创建 `ui/theme/Color.kt`、`Theme.kt`、`Type.kt`（Material 3）
-- [ ] 定义亮色 / 暗色配色（暗色完整实现可放到 P4，此处先留接口）
-- [ ] 创建 `ui/navigation/NavGraph.kt`，路由枚举：
+- [x] 创建 `ui/theme/Color.kt`、`Theme.kt`、`Type.kt`（Material 3）
+- [x] 定义亮色 / 暗色配色（暗色完整实现可放到 P4，此处先留接口）
+- [x] 创建 `ui/navigation/NavGraph.kt`，路由枚举：
   - `Home`
   - `Editor/{scriptId}`
   - `Settings`
-- [ ] 创建占位 Composable：`HomeScreen`、`EditorScreen`、`SettingsScreen`（仅显示标题 Text）
-- [ ] `MainActivity` 使用 `ClickerTheme { NavHost(...) }`
+- [x] 创建占位 Composable：`HomeScreen`、`EditorScreen`、`SettingsScreen`（仅显示标题 Text）
+- [x] `MainActivity` 使用 `ClickerTheme { NavHost(...) }`
 
 **产出：** 主题文件 + 三页占位 + 导航
 
@@ -145,11 +145,11 @@ util/
 **预估：** 1h  
 **依赖：** P0-03
 
-- [ ] 创建 `domain/model/ClickMode.kt` 枚举：`SEQUENTIAL`、`SIMULTANEOUS`
-- [ ] 创建 `domain/model/ClickPoint.kt`（x, y, delayAfterMs）
-- [ ] 创建 `domain/model/ClickScript.kt`（与 plan.md 6 节字段一致，使用领域类型非 Entity）
-- [ ] 创建 `domain/model/ClickState.kt` 密封类：`Idle`、`Running`、`Paused`、`Stopped`
-- [ ] 创建 `domain/model/GestureType.kt` 枚举：`TAP`、`SWIPE`（滑动功能 P4 使用，先定义）
+- [x] 创建 `domain/model/ClickMode.kt` 枚举：`SEQUENTIAL`、`SIMULTANEOUS`
+- [x] 创建 `domain/model/ClickPoint.kt`（x, y, delayAfterMs）
+- [x] 创建 `domain/model/ClickScript.kt`（与 plan.md 6 节字段一致，使用领域类型非 Entity）
+- [x] 创建 `domain/model/ClickState.kt` 密封类：`Idle`、`Running`、`Paused`、`Stopped`
+- [x] 创建 `domain/model/GestureType.kt` 枚举：`TAP`、`SWIPE`（滑动功能 P4 使用，先定义）
 
 **产出：** `domain/model/` 下 5 个文件
 
@@ -162,12 +162,12 @@ util/
 **预估：** 0.5h  
 **依赖：** P0-01
 
-- [ ] 在 `AndroidManifest.xml` 声明权限（先声明，服务后续注册）：
+- [x] 在 `AndroidManifest.xml` 声明权限（先声明，服务后续注册）：
   - `FOREGROUND_SERVICE`
   - `FOREGROUND_SERVICE_SPECIAL_USE`
   - `POST_NOTIFICATIONS`
   - `SYSTEM_ALERT_WINDOW`
-- [ ] 添加 `tools:targetApi` 注释说明 Android 14 special use 用途
+- [x] 添加 `tools:targetApi` 注释说明 Android 14 special use 用途
 
 **产出：** Manifest 权限块
 
@@ -180,9 +180,9 @@ util/
 **预估：** 0.5h  
 **依赖：** P0-01
 
-- [ ] 执行 `git init`
-- [ ] 添加 `.gitignore`：`.idea/`、`local.properties`、`build/`、`.gradle/`、`*.apk` 等
-- [ ] 首次提交：`chore: init android project skeleton`
+- [x] 执行 `git init`
+- [x] 添加 `.gitignore`：`.idea/`、`local.properties`、`build/`、`.gradle/`、`*.apk` 等
+- [x] 首次提交：`chore: init android project skeleton`
 
 **产出：** Git 仓库
 

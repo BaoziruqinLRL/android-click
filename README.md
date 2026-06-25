@@ -2,7 +2,7 @@
 
 ## 环境要求
 
-- JDK 17+
+- JDK 21（路径：`C:\Program Files\Java\jdk-21`）
 - Android SDK（API 34）
 - Android Studio Ladybug 或更高版本（推荐）
 
@@ -24,7 +24,7 @@ sdk.dir=C\:\\Users\\YourName\\AppData\\Local\\Android\\Sdk
 gradlew.bat assembleDebug
 ```
 
-> 需已安装 Android SDK，且 `gradle.properties` 中 `org.gradle.java.home` 指向 JDK 17+。
+> 需已安装 Android SDK，且 `gradle.properties` 中 `org.gradle.java.home` 指向 JDK 21。
 
 ## 项目结构
 
