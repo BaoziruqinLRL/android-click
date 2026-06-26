@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import android.content.pm.ServiceInfo
 import kotlinx.coroutines.launch
 
 class ClickForegroundService : Service() {
@@ -52,11 +53,16 @@ class ClickForegroundService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START -> {
-                val x = intent.getFloatExtra(EXTRA_X, 0f)
-                val y = intent.getFloatExtra(EXTRA_Y, 0f)
-                val interval = intent.getLongExtra(EXTRA_INTERVAL, 500L)
-                val count = intent.getIntExtra(EXTRA_COUNT, -1)
-                startClicking(x, y, interval, count)
+                // 如果 Intent 没有携带坐标（如悬浮窗发起的 start），复用缓存的参数
+                if (intent.hasExtra(EXTRA_X) && intent.hasExtra(EXTRA_Y)) {
+                    val x = intent.getFloatExtra(EXTRA_X, 0f)
+                    val y = intent.getFloatExtra(EXTRA_Y, 0f)
+                    val interval = intent.getLongExtra(EXTRA_INTERVAL, 500L)
+                    val count = intent.getIntExtra(EXTRA_COUNT, -1)
+                    startClicking(x, y, interval, count)
+                } else {
+                    startClicking(lastX, lastY, lastIntervalMs, lastCount)
+                }
             }
 
             ACTION_STOP -> stopClicking()
@@ -95,6 +101,12 @@ class ClickForegroundService : Service() {
             return
         }
 
+        // 缓存参数，供悬浮窗重新发起连点使用
+        lastX = x
+        lastY = y
+        lastIntervalMs = intervalMs
+        lastCount = count
+
         scheduler?.cancel()
         scheduler = null
         totalCount = count
@@ -109,7 +121,14 @@ class ClickForegroundService : Service() {
             )
         }
 
-        startForeground(NOTIFICATION_ID, buildNotification(0, count))
+        val notification = buildNotification(0, count)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_SPECIAL_USE_VALUE)
+        } else {
+            startForeground(NOTIFICATION_ID, notification)
+        }
 
         scheduler = ClickScheduler(
             x = x,
@@ -231,9 +250,16 @@ class ClickForegroundService : Service() {
 
         private const val CHANNEL_ID = "clicker_channel"
         private const val NOTIFICATION_ID = 1001
+        private const val FOREGROUND_SERVICE_TYPE_SPECIAL_USE_VALUE = 1 shl 7 // 0x80
 
         private val _state = MutableStateFlow(ClickServiceState())
         val state: StateFlow<ClickServiceState> = _state.asStateFlow()
+
+        // 缓存最近一次启动参数，供悬浮窗重新发起连点使用
+        private var lastX: Float = 0f
+        private var lastY: Float = 0f
+        private var lastIntervalMs: Long = 500L
+        private var lastCount: Int = -1
 
         fun start(
             context: Context,
@@ -255,6 +281,27 @@ class ClickForegroundService : Service() {
         fun stop(context: Context) {
             val intent = Intent(context, ClickForegroundService::class.java).apply {
                 action = ACTION_STOP
+            }
+            context.startService(intent)
+        }
+
+        fun pause(context: Context) {
+            val intent = Intent(context, ClickForegroundService::class.java).apply {
+                action = ACTION_PAUSE
+            }
+            context.startService(intent)
+        }
+
+        fun resume(context: Context) {
+            val intent = Intent(context, ClickForegroundService::class.java).apply {
+                action = ACTION_RESUME
+            }
+            context.startService(intent)
+        }
+
+        fun sendAction(context: Context, action: String) {
+            val intent = Intent(context, ClickForegroundService::class.java).apply {
+                this.action = action
             }
             context.startService(intent)
         }

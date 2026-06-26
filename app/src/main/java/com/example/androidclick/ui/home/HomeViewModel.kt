@@ -6,16 +6,20 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.androidclick.data.local.PreferencesDataStore
 import com.example.androidclick.domain.model.ClickState
 import com.example.androidclick.domain.usecase.ObserveClickStateUseCase
 import com.example.androidclick.service.ClickForegroundService
 import com.example.androidclick.service.ClickScheduler
 import com.example.androidclick.service.ClickServiceState
+import com.example.androidclick.ui.overlay.FloatingControlBridge
 import com.example.androidclick.util.PermissionChecker
+import com.example.androidclick.util.PermissionState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ClickDebugForm(
@@ -27,7 +31,8 @@ data class ClickDebugForm(
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    observeClickState: ObserveClickStateUseCase
+    observeClickState: ObserveClickStateUseCase,
+    private val preferencesDataStore: PreferencesDataStore
 ) : ViewModel() {
 
     val clickServiceState: StateFlow<ClickServiceState> = observeClickState()
@@ -43,12 +48,64 @@ class HomeViewModel @Inject constructor(
     var isAccessibilityEnabled by mutableStateOf(false)
         private set
 
+    var isOverlayEnabled by mutableStateOf(false)
+        private set
+
+    var isNotificationEnabled by mutableStateOf(false)
+        private set
+
+    var showFloatingBar by mutableStateOf(true)
+        private set
+
+    val permissionState: PermissionState
+        get() = PermissionState(
+            accessibility = isAccessibilityEnabled,
+            overlay = isOverlayEnabled,
+            notification = isNotificationEnabled
+        )
+
     val isClicking: Boolean
         get() = clickServiceState.value.state == ClickState.Running ||
             clickServiceState.value.state == ClickState.Paused
 
+    init {
+        viewModelScope.launch {
+            preferencesDataStore.showFloatingBar.collect { show ->
+                showFloatingBar = show
+                if (show) {
+                    FloatingControlBridge.show()
+                } else {
+                    FloatingControlBridge.hide()
+                }
+            }
+        }
+
+        // Auto show/hide floating bar based on clicking state
+        viewModelScope.launch {
+            clickServiceState.collect { state ->
+                if (state.state == ClickState.Running && showFloatingBar) {
+                    FloatingControlBridge.show()
+                }
+            }
+        }
+    }
+
+    fun toggleFloatingBar(show: Boolean) {
+        showFloatingBar = show
+        viewModelScope.launch {
+            preferencesDataStore.setShowFloatingBar(show)
+        }
+        if (show) {
+            FloatingControlBridge.show()
+        } else {
+            FloatingControlBridge.hide()
+        }
+    }
+
     fun refreshAccessibility(context: Context) {
         isAccessibilityEnabled = PermissionChecker.isAccessibilityServiceEnabled(context)
+        isOverlayEnabled = PermissionChecker.canDrawOverlays(context)
+        isNotificationEnabled = PermissionChecker.hasNotificationPermission(context)
     }
 
     fun updateX(value: String) {

@@ -19,8 +19,17 @@
     <string name="notification_channel_name">连点服务</string>
     <string name="notification_count_finite">已点击 %1$d / %2$d 次</string>
     <string name="notification_count_infinite">已点击 %1$d 次</string>
+    <string name="notification_permission_disabled">通知权限未开启，前台服务无法显示通知</string>
+    <string name="notification_permission_enabled">通知权限已开启</string>
+    <string name="notification_permission_reason">前台服务需要通知权限才能在后台持续运行</string>
     <string name="notification_title">连点运行中</string>
     <string name="open_accessibility_settings">去开启无障碍</string>
+    <string name="open_notification_permission">去开启通知</string>
+    <string name="open_overlay_permission">去开启悬浮窗</string>
+    <string name="overlay_permission_disabled">悬浮窗权限未开启，无法在其它 App 上显示控制条</string>
+    <string name="overlay_permission_enabled">悬浮窗权限已开启</string>
+    <string name="permission_all_ready">权限已就绪</string>
+    <string name="permission_status">权限状态</string>
     <string name="repeat_count">次数</string>
     <string name="repeat_count_hint">次数填 -1 表示无限连点</string>
     <string name="settings_title">设置</string>

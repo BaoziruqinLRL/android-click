@@ -367,10 +367,10 @@ util/
 **预估：** 1.5h  
 **依赖：** P0-07
 
-- [ ] 在 `PermissionChecker.kt` 添加：
+- [x] 在 `PermissionChecker.kt` 添加：
   - `canDrawOverlays(context): Boolean`（`Settings.canDrawOverlays`）
   - `requestOverlayPermission(activity)` → `ACTION_MANAGE_OVERLAY_PERMISSION`
-- [ ] 创建 `util/PermissionState.kt` 数据类汇总三项：无障碍、悬浮窗、通知
+- [x] 创建 `util/PermissionState.kt` 数据类汇总三项：无障碍、悬浮窗、通知
 
 **产出：** 悬浮窗权限工具函数
 
@@ -383,9 +383,9 @@ util/
 **预估：** 1h  
 **依赖：** P0-07
 
-- [ ] 在 `PermissionChecker.kt` 添加 `hasNotificationPermission`
-- [ ] 创建 `util/NotificationPermissionRequester.kt`，在 Home 首次进入时请求 `POST_NOTIFICATIONS`
-- [ ] 拒绝时显示说明：前台服务需要通知
+- [x] 在 `PermissionChecker.kt` 添加 `hasNotificationPermission`
+- [x] 创建 `util/NotificationPermissionRequester.kt`，在 Home 首次进入时请求 `POST_NOTIFICATIONS`
+- [x] 拒绝时显示说明：前台服务需要通知
 
 **产出：** 通知权限请求逻辑
 
@@ -398,11 +398,11 @@ util/
 **预估：** 2h  
 **依赖：** P2-01
 
-- [ ] 创建 `ui/overlay/OverlayWindowManager.kt`
-- [ ] 使用 `WindowManager` + `TYPE_APPLICATION_OVERLAY` 添加 View
-- [ ] 参数：`LayoutParams` 设置 `FLAG_NOT_FOCUSABLE`、初始位置右上角
-- [ ] 实现 `show()` / `hide()` / `isShowing()`
-- [ ] 处理 `Context` 用 `applicationContext` 避免泄漏
+- [x] 创建 `ui/overlay/OverlayWindowManager.kt`
+- [x] 使用 `WindowManager` + `TYPE_APPLICATION_OVERLAY` 添加 View
+- [x] 参数：`LayoutParams` 设置 `FLAG_NOT_FOCUSABLE`、初始位置右上角
+- [x] 实现 `show()` / `hide()` / `isShowing()`
+- [x] 处理 `Context` 用 `applicationContext` 避免泄漏
 
 **产出：** `OverlayWindowManager.kt`
 
@@ -415,13 +415,13 @@ util/
 **预估：** 3h  
 **依赖：** P2-03
 
-- [ ] 创建 `ui/overlay/FloatingControlBar.kt`（Compose 用 `ComposeView` 嵌入，或传统 View）
-- [ ] UI 元素：
+- [x] 创建 `ui/overlay/FloatingControlBar.kt`（Compose 用 `ComposeView` 嵌入，或传统 View）
+- [x] UI 元素：
   - 状态指示灯（运行绿 / 暂停黄 / 停止灰）
   - 当前计数 Text：`12 / 100` 或 `12 / ∞`
   - 按钮：▶ 开始、`⏸` 暂停、`⏹` 停止
-- [ ] 实现拖动手势：监听 `ACTION_DOWN/MOVE/UP` 更新 `LayoutParams.x/y`
-- [ ] 边缘吸附（可选）：松手时贴近左右边缘
+- [x] 实现拖动手势：监听 `ACTION_DOWN/MOVE/UP` 更新 `LayoutParams.x/y`
+- [x] 边缘吸附（可选）：松手时贴近左右边缘
 
 **产出：** `FloatingControlBar.kt`
 
@@ -434,10 +434,10 @@ util/
 **预估：** 2h  
 **依赖：** P2-04, P1-07
 
-- [ ] 定义 Service Intent Actions：`ACTION_START`、`ACTION_PAUSE`、`ACTION_RESUME`、`ACTION_STOP`
-- [ ] 扩展 `ClickForegroundService` 处理 pause/resume
-- [ ] 悬浮窗按钮发送对应 Action 到 Service
-- [ ] Service stateFlow 变化时更新悬浮窗 UI（注册回调或 collect）
+- [x] 定义 Service Intent Actions：`ACTION_START`、`ACTION_PAUSE`、`ACTION_RESUME`、`ACTION_STOP`
+- [x] 扩展 `ClickForegroundService` 处理 pause/resume
+- [x] 悬浮窗按钮发送对应 Action 到 Service
+- [x] Service stateFlow 变化时更新悬浮窗 UI（注册回调或 collect）
 
 **产出：** 双向联动
 
@@ -450,11 +450,11 @@ util/
 **预估：** 2h  
 **依赖：** P2-01, P2-02, P1-04
 
-- [ ] 创建 `ui/home/PermissionCard.kt` Composable
-- [ ] 三行状态：无障碍 ✅/❌、悬浮窗 ✅/❌、通知 ✅/❌
-- [ ] 每行未授权时显示「去开启」按钮
-- [ ] 在 `HomeScreen` 顶部嵌入 `PermissionCard`
-- [ ] `onResume` 时刷新权限状态
+- [x] 创建 `ui/home/PermissionCard.kt` Composable
+- [x] 三行状态：无障碍 ✅/❌、悬浮窗 ✅/❌、通知 ✅/❌
+- [x] 每行未授权时显示「去开启」按钮
+- [x] 在 `HomeScreen` 顶部嵌入 `PermissionCard`
+- [x] `onResume` 时刷新权限状态
 
 **产出：** `PermissionCard.kt`
 
@@ -467,9 +467,9 @@ util/
 **预估：** 1h  
 **依赖：** P2-03, P2-06
 
-- [ ] 在 `HomeScreen` 添加开关：「显示悬浮控制条」
-- [ ] 使用 DataStore 持久化开关状态（`util/PreferencesManager.kt` 占位，P3 完善）
-- [ ] 连点开始时自动 show 悬浮窗；停止后可配置是否隐藏
+- [x] 在 `HomeScreen` 添加开关：「显示悬浮控制条」
+- [x] 使用 DataStore 持久化开关状态（`util/PreferencesManager.kt` 占位，P3 完善）
+- [x] 连点开始时自动 show 悬浮窗；停止后可配置是否隐藏
 
 **产出：** 悬浮窗开关
 
@@ -482,9 +482,9 @@ util/
 **预估：** 1h  
 **依赖：** P2-05, P2-07
 
-- [ ] 切到第三方 App，悬浮窗仍可见可操作
-- [ ] 旋转屏幕后悬浮窗不崩溃（位置可重置）
-- [ ] 内存泄漏检查：反复 show/hide 10 次
+- [x] 切到第三方 App，悬浮窗仍可见可操作
+- [x] 旋转屏幕后悬浮窗不崩溃（位置可重置）
+- [x] 内存泄漏检查：反复 show/hide 10 次
 
 **产出：** P2 阶段完成
 

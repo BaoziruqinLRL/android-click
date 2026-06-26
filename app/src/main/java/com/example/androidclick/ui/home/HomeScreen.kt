@@ -3,19 +3,17 @@ package com.example.androidclick.ui.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -34,6 +32,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.androidclick.R
 import com.example.androidclick.domain.model.ClickState
+import com.example.androidclick.util.NotificationPermissionRequester
+import com.example.androidclick.util.PermissionChecker
 
 @Composable
 fun HomeScreen(
@@ -43,6 +43,7 @@ fun HomeScreen(
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
+    val activity = context as? android.app.Activity
     val clickState by viewModel.clickServiceState.collectAsStateWithLifecycle()
     val form = viewModel.form
     val isClicking = clickState.state == ClickState.Running ||
@@ -62,6 +63,12 @@ fun HomeScreen(
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 
+    // P2-02: 首次进入时请求通知权限
+    DisposableEffect(Unit) {
+        activity?.let { NotificationPermissionRequester.request(it) }
+        onDispose { }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -74,31 +81,18 @@ fun HomeScreen(
             style = MaterialTheme.typography.titleLarge
         )
 
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = if (isAccessibilityEnabled) {
-                    MaterialTheme.colorScheme.primaryContainer
-                } else {
-                    MaterialTheme.colorScheme.errorContainer
-                }
-            )
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = if (isAccessibilityEnabled) {
-                        stringResource(R.string.accessibility_enabled)
-                    } else {
-                        stringResource(R.string.accessibility_disabled)
-                    },
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedButton(onClick = { viewModel.openAccessibilitySettings(context) }) {
-                    Text(stringResource(R.string.open_accessibility_settings))
-                }
-            }
-        }
+        PermissionCard(
+            permissionState = viewModel.permissionState,
+            onOpenAccessibility = { viewModel.openAccessibilitySettings(context) },
+            onOpenOverlay = { activity?.let { PermissionChecker.requestOverlayPermission(it) } },
+            onOpenNotification = { activity?.let { NotificationPermissionRequester.request(it) } }
+        )
+
+        // P2-07: 悬浮窗显示/隐藏开关
+        FloatingBarToggle(
+            showFloatingBar = viewModel.showFloatingBar,
+            onToggle = viewModel::toggleFloatingBar
+        )
 
         Text(
             text = stringResource(R.string.debug_section_title),
@@ -222,6 +216,37 @@ private fun StatusCard(clickState: com.example.androidclick.service.ClickService
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun FloatingBarToggle(
+    showFloatingBar: Boolean,
+    onToggle: (Boolean) -> Unit
+) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = "显示悬浮控制条",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "开启后在其它应用上方显示连点控制按钮",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Switch(
+                checked = showFloatingBar,
+                onCheckedChange = onToggle
+            )
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.androidclick.ui.home;
 
+import com.example.androidclick.data.local.PreferencesDataStore;
 import com.example.androidclick.domain.usecase.ObserveClickStateUseCase;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -26,21 +27,27 @@ import javax.inject.Provider;
 public final class HomeViewModel_Factory implements Factory<HomeViewModel> {
   private final Provider<ObserveClickStateUseCase> observeClickStateProvider;
 
-  public HomeViewModel_Factory(Provider<ObserveClickStateUseCase> observeClickStateProvider) {
+  private final Provider<PreferencesDataStore> preferencesDataStoreProvider;
+
+  public HomeViewModel_Factory(Provider<ObserveClickStateUseCase> observeClickStateProvider,
+      Provider<PreferencesDataStore> preferencesDataStoreProvider) {
     this.observeClickStateProvider = observeClickStateProvider;
+    this.preferencesDataStoreProvider = preferencesDataStoreProvider;
   }
 
   @Override
   public HomeViewModel get() {
-    return newInstance(observeClickStateProvider.get());
+    return newInstance(observeClickStateProvider.get(), preferencesDataStoreProvider.get());
   }
 
   public static HomeViewModel_Factory create(
-      Provider<ObserveClickStateUseCase> observeClickStateProvider) {
-    return new HomeViewModel_Factory(observeClickStateProvider);
+      Provider<ObserveClickStateUseCase> observeClickStateProvider,
+      Provider<PreferencesDataStore> preferencesDataStoreProvider) {
+    return new HomeViewModel_Factory(observeClickStateProvider, preferencesDataStoreProvider);
   }
 
-  public static HomeViewModel newInstance(ObserveClickStateUseCase observeClickState) {
-    return new HomeViewModel(observeClickState);
+  public static HomeViewModel newInstance(ObserveClickStateUseCase observeClickState,
+      PreferencesDataStore preferencesDataStore) {
+    return new HomeViewModel(observeClickState, preferencesDataStore);
   }
 }

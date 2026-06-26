@@ -1,0 +1,4 @@
+com.example.androidclick.test.app-androidTest-0 C:\Project\cursor\androidClick\app\build\generated\res\resValues\androidTest\debug
+com.example.androidclick.test.app-mergeDebugAndroidTestResources-1 C:\Project\cursor\androidClick\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.androidclick.test.app-mergeDebugAndroidTestResources-2 C:\Project\cursor\androidClick\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.androidclick.test.app-debugAndroidTest-3 C:\Project\cursor\androidClick\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

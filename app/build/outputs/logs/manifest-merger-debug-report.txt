@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-55:12
-INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-55:12
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-56:12
+INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:2:1-56:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.2.0] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\6cf8181702a6391b4b7897c53af8db54\transformed\hilt-navigation-compose-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.2.0] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\37ab3f4ee8d73abf21d225321752e94e\transformed\hilt-navigation-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.8.5] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\c95b384d2a3d80ef087916f33f6b82a5\transformed\navigation-common-2.8.5\AndroidManifest.xml:17:1-22:12
@@ -101,8 +101,8 @@ ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:10:5-
 	android:name
 		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:10:22-75
 application
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:12:5-53:19
-INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:12:5-53:19
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:12:5-54:19
+INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:12:5-54:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\894a35ba22bbe5b0d755f4f61b01c6e9\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\894a35ba22bbe5b0d755f4f61b01c6e9\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.lifecycle:lifecycle-process:2.8.7] C:\Users\liriling.DESKTOP-2IFFNC2\.gradle\caches\8.11.1\transforms\f8f0070add0ec4e59fc30d9ce4ce02de\transformed\lifecycle-process-2.8.7\AndroidManifest.xml:23:5-33:19
@@ -140,59 +140,61 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\li
 	android:name
 		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:13:9-43
 activity#com.example.androidclick.MainActivity
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:22:9-30:20
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:22:9-31:20
 	android:exported
 		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:24:13-36
+	android:configChanges
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:25:13-59
 	android:theme
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:25:13-54
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:26:13-54
 	android:name
 		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:23:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:26:13-29:29
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:27:13-30:29
 action#android.intent.action.MAIN
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:27:17-69
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:27:25-66
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:28:17-77
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:29:17-77
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:28:27-74
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:29:27-74
 service#com.example.androidclick.service.ClickAccessibilityService
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:32:9-42:19
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:33:9-43:19
 	android:exported
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:34:13-36
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:35:13-36
 	android:permission
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:35:13-79
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:36:13-79
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:33:13-62
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:34:13-62
 intent-filter#action:name:android.accessibilityservice.AccessibilityService
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:36:13-38:29
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:37:13-39:29
 action#android.accessibilityservice.AccessibilityService
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:37:17-92
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:38:17-92
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:37:25-89
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:38:25-89
 meta-data#android.accessibilityservice
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:39:13-41:72
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:40:13-42:72
 	android:resource
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:41:17-69
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:42:17-69
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:40:17-60
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:41:17-60
 service#com.example.androidclick.service.ClickForegroundService
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:44:9-52:19
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:45:9-53:19
 	android:exported
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:46:13-37
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:47:13-37
 	android:foregroundServiceType
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:47:13-55
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:48:13-55
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:45:13-59
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:46:13-59
 property#android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE
-ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:48:13-51:40
+ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:49:13-52:40
 	tools:targetApi
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:51:17-37
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:52:17-37
 	android:value
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:50:17-62
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:51:17-62
 	android:name
-		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:49:17-76
+		ADDED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml:50:17-76
 uses-sdk
 INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Project\cursor\androidClick\app\src\main\AndroidManifest.xml
