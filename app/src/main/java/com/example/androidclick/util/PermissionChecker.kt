@@ -9,7 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import android.text.TextUtils
+
 import androidx.core.content.ContextCompat
 import com.example.androidclick.service.ClickAccessibilityService
 
@@ -24,9 +24,9 @@ object PermissionChecker {
             Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
         ) ?: return false
 
-        return TextUtils.SimpleStringSplitter(':').apply {
-            setString(enabledServices)
-        }.any { service -> service.equals(expected, ignoreCase = true) }
+        return enabledServices.split(':').any { service ->
+            service.equals(expected, ignoreCase = true)
+        }
     }
 
     fun openAccessibilitySettings(context: Context) {

@@ -7,7 +7,10 @@
       "Bash(./gradlew compileDebugKotlin)",
       "Bash(ls:*)",
       "Bash(./gradlew.bat compileDebugKotlin)",
-      "Bash(./gradlew.bat compileDebugKotlin --info)"
+      "Bash(./gradlew.bat compileDebugKotlin --info)",
+      "Bash(git:*)",
+      "Bash(./gradlew :app:dependencies --configuration releaseRuntimeClasspath)",
+      "Bash(cmd /c \"gradlew.bat :app:dependencies --configuration debugRuntimeClasspath 2>&1\")"
     ]
   }
 }
